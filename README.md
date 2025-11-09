@@ -52,10 +52,10 @@ As métricas utilizadas para avaliação são:
 Exemplo de saída (simulada):
 
 | Época | Accuracy | F1 (macro) |
-|--------|-----------|------------|
-| 1 | 0.86 | 0.81 |
-| 2 | 0.89 | 0.84 |
-| 3 | 0.90 | 0.86 ✅ (melhor modelo) |
+|--------|-------------|--------------|
+| 1 | 0.804815 | 0.725156 |
+| 2 | 0.838523 | 0.753326 |
+| 3 | 0.852220 | 0.761679 ✅ (melhor modelo) |
 
 
 ## 💬 Exemplo de Inferência
@@ -64,7 +64,8 @@ Exemplo de saída (simulada):
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 
-model_name = "./results/checkpoint-best"
+model_name = "results1/classificador_odio.model/checkpoint-1755"
+
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForSequenceClassification.from_pretrained(model_name)
 

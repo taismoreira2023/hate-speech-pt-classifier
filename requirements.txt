@@ -1,0 +1,8 @@
+torch
+transformers
+datasets
+huggingface_hub
+evaluate
+numpy
+unidecode
+nltk

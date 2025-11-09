@@ -1,0 +1,9 @@
+# ---- PYTHON ----
+__pycache__/
+
+
+# ---- VENV ----
+venv/
+
+# ---- MODEL CHECKPOINTS ----
+results1/
