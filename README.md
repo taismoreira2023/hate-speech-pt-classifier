@@ -16,6 +16,28 @@ O objetivo é detectar se um texto contém **discurso de ódio (classe 1)** ou *
 
 ---
 
+## **Clonar o repositório**
+
+```bash
+git clone https://github.com/taismoreira2023/hate-speech-pt-classifier.git
+cd hate-speech-pt-classifier
+```
+## **Criar o ambiente virtual**
+
+### **Windows (PowerShell)**
+
+```powershell
+.\venv.ps1
+```
+
+### **Linux / macOS**
+
+```bash
+./venv.sh
+```
+
+---
+
 ## ⚙️ Tecnologias Utilizadas
 
 - 🧩 [Hugging Face Transformers](https://huggingface.co/transformers)
@@ -25,7 +47,13 @@ O objetivo é detectar se um texto contém **discurso de ódio (classe 1)** ou *
 - 🧰 [Trainer API](https://huggingface.co/docs/transformers/main_classes/trainer)
 - 💾 GPU com CUDA (opcional, mas recomendável)
 
+---
 ## 🧠 Treinamento
+Para executar o treinamento completo:
+
+```bash
+python script/classificacao_discurso_odio.py
+```
 
 O script realiza:
 1. Carregamento e limpeza dos datasets.  
@@ -57,22 +85,26 @@ Exemplo de saída (simulada):
 | 2 | 0.838523 | 0.753326 |
 | 3 | 0.852220 | 0.761679 ✅ (melhor modelo) |
 
+---
+##**Executar a inferência (classificação de texto)**
 
-## 💬 Exemplo de Inferência
+Criado arquivo `predict.py` com o conteúdo:
 
 ```python
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 
-model_name = "results1/classificador_odio.model/checkpoint-1755"
+model_name = "results1/classificador_odio.model/checkpoint-1755"  # ajuste para o seu caminho
 
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForSequenceClassification.from_pretrained(model_name)
 
 example = "Esse trabalho é uma porcaria inútil"
 inputs = tokenizer(example, return_tensors="pt")
+
 with torch.no_grad():
     outputs = model(**inputs)
+
 pred = torch.argmax(outputs.logits, dim=-1).item()
 
 print(f"Texto: {example}")
@@ -80,7 +112,13 @@ print(f"Classe prevista: {pred}")
 # 0 = neutro, 1 = discurso de ódio
 ```
 
+Execute:
+
+```bash
+python predict.py
+```
+
+---
 🧾 Licença
 Este projeto é distribuído sob a licença MIT.
 Você é livre para usar, modificar e distribuir, desde que mantenha os créditos.
-
